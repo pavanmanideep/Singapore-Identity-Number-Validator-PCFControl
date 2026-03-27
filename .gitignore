@@ -3,8 +3,7 @@
 # dependencies
 /node_modules
 
-# generated directory
-**/generated
+# generated directory (allow type definitions needed for TypeScript)
 
 # output directory
 /out
