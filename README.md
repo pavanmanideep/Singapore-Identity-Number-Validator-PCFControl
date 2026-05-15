@@ -154,4 +154,4 @@ For issues, questions, or contributions, please use the GitHub issue tracker.
 
 **Note**: This control validates the format and checksum of NRIC/FIN numbers but does not verify if the number is actually issued by the Singapore government. Always verify identity documents through official channels. Once the managed solution is imported to the target Power Platform Environment, you may loose the capability to delete the control, so please use at caution.
 
-![Visitors](https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fgithub.com%2Fpavanmanideep%2FSingapore-Identity-Number-Validator-PCFControl)
+
