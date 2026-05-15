@@ -2,7 +2,7 @@
 ![Platform](https://img.shields.io/badge/Platform-Power%20Platform-blue)
 ![Type](https://img.shields.io/badge/Type-PCF%20Control-purple)
 ![Release](https://img.shields.io/badge/Release-v1.0.0-orange)
-![Visitors](https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https://github.com/pavanmanideep/Singapore-Identity-Number-Validator-PCFControl)
+![Visitors](https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https://gitlab.com/pavan/Singapore-Identity-Number-Validator-PCFControl)
 
 # Singapore NRIC/FIN Validator - PCF Control
 
