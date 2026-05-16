@@ -1,0 +1,55 @@
+name: Deploy to ecellorsdev
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  build-and-deploy:
+    runs-on: windows-latest
+    environment: ecellorsdev
+    permissions:
+      contents: read
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'
+
+      - name: Install Node dependencies
+        run: npm ci
+
+      - name: Build PCF control
+        run: npm run build
+
+      - name: Setup MSBuild
+        uses: microsoft/setup-msbuild@v2
+
+      - name: Restore NuGet packages for solution
+        working-directory: EcellorsSingaporeNRICSolution
+        run: nuget restore EcellorsSingaporeNRICSolution.cdsproj
+
+      - name: Build solution package
+        working-directory: EcellorsSingaporeNRICSolution
+        run: msbuild EcellorsSingaporeNRICSolution.cdsproj /t:build /restore /p:configuration=Release
+
+      - name: Install Power Platform CLI
+        uses: microsoft/powerplatform-actions/actions-install@v1
+
+      - name: Import solution to ecellorsdev
+        uses: microsoft/powerplatform-actions/import-solution@v1
+        with:
+          environment-url: 'https://ecellorsdev.crm.dynamics.com'
+          app-id: ${{ secrets.POWERPLATFORM_APP_ID }}
+          client-secret: ${{ secrets.POWERPLATFORM_CLIENT_SECRET }}
+          tenant-id: ${{ secrets.POWERPLATFORM_TENANT_ID }}
+          solution-file: 'EcellorsSingaporeNRICSolution/bin/Release/EcellorsSingaporeNRICSolution.zip'
+          force-overwrite: true
+          publish-changes: true
